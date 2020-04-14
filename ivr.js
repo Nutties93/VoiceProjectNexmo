@@ -27,7 +27,7 @@ const onInboundCall = (request, response) => {
         {
             action: 'input',
             eventUrl: [`${request.protocol}://${request.get('host')}/webhooks/dtmf`],
-            timeOut: 10,
+            timeOut: 15,
             maxDigits: 1,
             submitOnHash: true
         }
