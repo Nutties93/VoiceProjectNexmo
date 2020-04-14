@@ -2,15 +2,14 @@ require('dotenv').config();
 const Nexmo = require('nexmo');
 const app = require('express')();
 const bodyParser = require('body-parser')
-const origin_phone_number = "447451288248";
-const sales_office_number = "6583824883";
+const origin_phone_number = process.env.VIRTUAL_NUMBER;
+const sales_office_number = process.env.TO_NUMBER;
 const moment = require('moment');
 app.use(bodyParser.json())
 
 var uuid ="";
-//Add extra code that you create in this exercise here
 
-	
+//Add extra code that you create in this exercise here! 	
 moment().format('dddd')
 	
 moment().format('MMMM Do YYYY')
@@ -22,7 +21,7 @@ const onInboundCall = (request, response) => {
         {
           action: 'talk',
           text: `Hello, welcome to the demo! Today's date is ${moment().format('MMMM Do YYYY')}, it's a ${moment().format('dddd')} and the time now is ${moment().format('h:mm:ss')}.
-           To speak with an agent, press 1. For Customer Support press 2. For the press office, press 3. To hear a preselected audio file, press 4.`,
+           To speak with an agent, press 1. For Customer Support press 2. For the press office, press 3. To hear a preselected audio file, press 4. Followed by a HASH key.`,
           bargeIn: true
         },
         {
@@ -36,7 +35,6 @@ const onInboundCall = (request, response) => {
       console.log(request.query.uuid)
       uuid = request.query.uuid;
       response.json(ncco)
-
 }
 
 
@@ -71,7 +69,7 @@ const onInput = (request, response) => {
             [
                 {
                     action: 'talk',
-                    text: 'You have asked to speak with customer service, please input your 5 digit account number followed by the pound sign',
+                    text: 'You have asked to speak with customer service, please input your 5 digit account number followed by the HASH key.',
                     bargeIn: true
                 },
                 {
@@ -173,10 +171,5 @@ app
   .post('/webhooks/events', onEvent)
   .post('/webhooks/accountInput', onAccountInput)
   .post('/webhooks/recordingFinished', onRecordingFinished)
-
-
-
-
-
 
 app.listen(3000)
