@@ -49,6 +49,7 @@ We will run the IVR application. I have edited to sample code to meet all the re
 --> 2) Press 1 to be redirected to the TO_NUMBER that you have stored in the .env file.
 ```
 3rd requirement: Your TO_NUMBER phone should start ringing.
+```
 --> 1) Dial to your VIRTUAL.NUMBER that you have stored in the .env file.
 
 --> 2) Press 4 to hear a sample mp3 audio file.
